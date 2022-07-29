@@ -17,8 +17,31 @@ class CartItem extends React.Component {
     }
 
     increaseQuantity = () => {
+        // this.state.qty += 1; // will increase the quantity in console not on browser
         console.log('this',this.state);
-    }
+
+        // //setState form 1
+        // this.setState({
+        //     qty: this.state.qty + 1 // shallow merging with this.state function written above
+        //     // will only touch the qty as awritten above not oter fields.
+
+        // });
+
+        //setState 2nd form -- using arrown function -- if previous State requires use this form
+        this.setState((prevState) => {
+            return{
+            qty:prevState.qty +1
+            }
+        });
+   }
+
+   deacreaseQuantity = () => {
+    this.setState((prevState) => {
+        return{
+        qty:prevState.qty -1
+        }
+    });
+   }
     render () {
         // destructring used -- object destructing used
         const { price,title,qty} = this.state;
@@ -54,6 +77,7 @@ class CartItem extends React.Component {
                     <img 
                         alt = "decrease" className="action-icons" 
                         src="https://cdn-icons-png.flaticon.com/512/992/992683.png" 
+                        onClick={this.deacreaseQuantity}
                     />
                     <img
                         alt = "delete" className="action-icons"
