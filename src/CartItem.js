@@ -14,36 +14,108 @@ class CartItem extends React.Component {
             qty:1,
             img:''
         }
+        this.testing();
+    }
+
+    testing () {
+        const promise = new Promise((resolve,reject) => {
+            setTimeout(()=>{
+                resolve('done');
+            },5000);
+        });
+
+        promise.then(()=>{
+            //setState acts like a synchronous call beofre react version 17
+            //now its asynchronous in new version avbove 17
+            // this.setState({qty:100});
+            this.setState({qty:this.state.qty + 10});
+            this.setState({qty:this.state.qty + 10});
+            this.setState({qty:this.state.qty + 10});
+
+            console.log('state',this.state);
+        });
     }
 
     increaseQuantity = () => {
         // this.state.qty += 1; // will increase the quantity in console not on browser
-        console.log('this',this.state);
+        // console.log('this',this.state);
 
         // //setState form 1
         // this.setState({
         //     qty: this.state.qty + 1 // shallow merging with this.state function written above
         //     // will only touch the qty as awritten above not oter fields.
 
+        // }, () =>{} //nested callback func in 1st form);
+
+        //if we want to increase quantity directly by 3 or thrice at one go
+        //calling above function thrice --lets checck it will do the work or not
+        // this.setState({
+        //     qty: this.state.qty + 1 // shallow merging with this.state function written above
+        //     // will only touch the qty as awritten above not oter fields.
+
+        // });
+        // this.setState({
+        //     qty: this.state.qty + 1 // shallow merging with this.state function written above
+        //     // will only touch the qty as awritten above not oter fields.
+
+        // });
+        // this.setState({
+        //     // qty: this.state.qty + 1 // shallow merging with this.state function written above
+        //     // will only touch the qty as awritten above not oter fields.
+        //     // only increasing qty + in the last state call will increase the qty -eg below
+        //     qty: this.state.qty + 3 // qty now will increase by 3 in every click
         // });
 
+        //above function not working , its icnreasing by one only --
+        //METHOD = BATCHING ie react renders above function as 1 time only no matter how may times its repeated , it starts from 1 only
+        // All calls will merge into 1 state call = renderrd once
+
+
+
         //setState 2nd form -- using arrown function -- if previous State requires use this form
+        //this state called thrice qty increasing but rendering only once in console
+        // this.setState((prevState) => {
+        //     return{
+        //     qty:prevState.qty +1
+        //     }
+        // });
+        // this.setState((prevState) => {
+        //     return{
+        //     qty:prevState.qty +1
+        //     }
+        // });
+        // this.setState((prevState) => {
+        //     return{
+        //     qty:prevState.qty +1
+        //     }
+        // });
+
+            //increasing qty and redering at once=--calling another callback fun in first call func
+
         this.setState((prevState) => {
             return{
             qty:prevState.qty +1
             }
+        },()=>{ //nested callback func
+            console.log('this.state',this.state);
         });
    }
 
    deacreaseQuantity = () => {
+    const { qty } = this.state;
+    if( qty ===0 ){
+        return;
+    }
     this.setState((prevState) => {
         return{
         qty:prevState.qty -1
         }
     });
+
    }
     render () {
         // destructring used -- object destructing used
+        console.log('render'); // to check rendering times when we call function above - icrease or decrease
         const { price,title,qty} = this.state;
         return (
             <div className = "cart-item">
