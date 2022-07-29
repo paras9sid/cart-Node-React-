@@ -8,33 +8,35 @@ class CartItem extends React.Component {
     //using below made constrcut call in below divs
     constructor() {
         super();
-        this.state = {
-            price:9999,
-            title:'Mobile Phone',
-            qty:1,
-            img:''
-        }
-        this.testing();
+        //passing this list in cart to make lists of products--commenting here
+        // this.state = {
+        //     price:9999,
+        //     title:'Mobile Phone',
+        //     qty:1,
+        //     img:''
+        // }
+        // this.testing();
     }
 
-    testing () {
-        const promise = new Promise((resolve,reject) => {
-            setTimeout(()=>{
-                resolve('done');
-            },5000);
-        });
+    // testing () {
+    //     const promise = new Promise((resolve,reject) => {
+    //         setTimeout(()=>{
+    //             resolve('done');
+    //         },5000);
+    //     });
 
-        promise.then(()=>{
-            //setState acts like a synchronous call beofre react version 17
-            //now its asynchronous in new version avbove 17
-            // this.setState({qty:100});
-            this.setState({qty:this.state.qty + 10});
-            this.setState({qty:this.state.qty + 10});
-            this.setState({qty:this.state.qty + 10});
+    //     promise.then(()=>{
+    //         //setState acts like a synchronous call beofre react version 17
+    //         //now its asynchronous in new version avbove 17
+    //         // this.setState({qty:100});
+    //         // this.setState({qty:this.state.qty + 10});
+    //         // this.setState({qty:this.state.qty + 10});
+    //         // this.setState({qty:this.state.qty + 10});
 
-            console.log('state',this.state);
-        });
-    }
+    //         // console.log('state',this.state);
+            
+    //     });
+    // }
 
     increaseQuantity = () => {
         // this.state.qty += 1; // will increase the quantity in console not on browser
@@ -114,11 +116,16 @@ class CartItem extends React.Component {
 
    }
     render () {
+        console.log('this.props',this.props); // cart item passed in props property
         // destructring used -- object destructing used
-        console.log('render'); // to check rendering times when we call function above - icrease or decrease
-        const { price,title,qty} = this.state;
+        // console.log('render'); // to check rendering times when we call function above - icrease or decrease
+        //using props fields and properties
+        const { price,title,qty} = this.props.product;
+
+        // const { price,title,qty} = this.state;
         return (
             <div className = "cart-item">
+                {this.props.jsx}
                 <div className="left-block">
 
                     {/* passing styles object in image tag writtenbelow */}
