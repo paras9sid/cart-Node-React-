@@ -32,6 +32,40 @@ class Cart extends React.Component {
         }
             
     }
+    handleIncreaseQuantity = (product) => { 
+        
+        const { products } = this.state;
+        const index = products.indexOf(product);
+        products[index].qty += 1;
+
+        this.setState({
+            products
+        });
+
+    }
+    handleDecreaseQuantity = (product) => {
+       
+        const { products } = this.state;
+        const index = products.indexOf(product);
+
+        if( products[index].qty ===0 ){
+            return;
+        }
+
+        products[index].qty -= 1;
+
+        this.setState({
+            products
+        });
+    }
+
+    handleDeleteProduct = (id) => {
+        const { products } = this.state;
+        const items = products.filter((item)=> item.id !== id);// [{}] will pass the array whose item id is not = to the product id
+        this.setState({
+            products:items
+        });
+    }
 
    render(){
     const {products} = this.state;
@@ -55,7 +89,9 @@ class Cart extends React.Component {
                         // isLoggedIn= {false}
                         // jsx = {<h1>Test</h1>}
                         // comp = {<CartItem/>}
-
+                        onIncreaseQuantity = { this.handleIncreaseQuantity }
+                        onDecreaseQuantity = { this.handleDecreaseQuantity }
+                        onDeleteProduct = {this.handleDeleteProduct}
                     />
                     )
                 })
