@@ -136,7 +136,7 @@ const CartItem = (props) => { // conversion of calss into arrow functions
                 <div className="left-block">
 
                     {/* passing styles object in image tag writtenbelow */}
-                    <img style={styles.image}/>
+                    <img style={styles.image} src={product.img}/>
 
                 </div>
                 <div className="right-block">
