@@ -1,7 +1,7 @@
 import React from "react";
 
 
-class CartItem extends React.Component {
+const CartItem = (props) => { // conversion of calss into arrow functions
 //     // adding state components -- js object to store particular item
 //     // define a constructor
 //     //always call super(); first before calling 'this' keyword in constructor--otherwise error occurs
@@ -115,25 +115,24 @@ class CartItem extends React.Component {
 //     });
 
 //    }
-    render () {
-        console.log('this.props',this.props); // cart item passed in props property
+    // render () { // not needed in arrow function declared 
         
         // destructring used -- object destructing used
         // console.log('render'); // to check rendering times when we call function above - icrease or decrease
         //using props fields and properties by destructuring method
-        const { price,title,qty} = this.props.product;
+        const { price,title,qty} = props.product; //this is removed
 
         const {
             product,
             onIncreaseQuantity,
             onDecreaseQuantity,
             onDeleteProduct 
-        } = this.props;
+        } = props; // this is removed
 
         // const { price,title,qty} = this.state;
         return (
             <div className = "cart-item">
-                {this.props.jsx}
+                {/* {this.props.jsx} commneted when this is removed from above */}
                 <div className="left-block">
 
                     {/* passing styles object in image tag writtenbelow */}
@@ -168,7 +167,7 @@ class CartItem extends React.Component {
                     />
                     <img
                         alt = "delete" className="action-icons"
-                        src="https://cdn-icons.flaticon.com/png/512/3405/premium/3405244.png?token=exp=1659084438~hmac=d0af61c5b012171b996e546ef598e5c2" 
+                        src="https://cdn-icons.flaticon.com/png/512/3405/premium/3405244.png?token=exp=1659265056~hmac=b018f315c915cb83f1cd55791e859b6c" 
                         onClick={ () => onDeleteProduct(product.id)}
 
                     />
@@ -178,7 +177,7 @@ class CartItem extends React.Component {
                        
         )
     }
-}
+
 
 // cant style directly in jsx -- objects needs to be made for styling
 //no need to add px after measurement jsx takes it automatically
